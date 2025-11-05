@@ -26,9 +26,27 @@
     <!-- קצת CSS מקומי מינימלי (ניתן להעביר ל־main.css אם תרצה) -->
     <style>
       /* שיפור התצוגה של תמונות קטנות בלוח הפרויקטים */
-      .col-4 { text-align: center; }
-      .col-4 img { max-height: 100px; width: auto; margin: 0 auto; display: block; }
-      .image.fit { display: block; margin: 0 auto 1em; max-width: 100%; }
+      .col-4 { 
+        text-align: center; 
+        }
+
+        /* כלל מרכזי: מבטיח שכל תמונה בטור שומרת על פרופורציות */
+        .col-4 img { 
+            max-height: 180px; /* גובה מקסימלי סביר (ניתן לשנות) */
+            width: auto !important; /* חובה: מבטל כל רוחב כפוי ושומר על הפרופורציה */
+            height: auto !important; /* חובה: מבטל כל גובה כפוי ושומר על הפרופורציה */
+            margin: 0 auto; 
+            display: block; 
+        }
+
+        /* כלל לתמונות עם הקלאס .image.fit (גרפי היחסים) */
+        .image.fit { 
+            display: block; 
+            margin: 0 auto 1em; 
+            max-width: 1000%; /* שומר על הקטנת התמונה כפי שרצית קודם */
+            width: auto !important; /* מבטל מתיחה */
+            height: auto !important; /* מבטל מתיחה */
+        }
     </style>
 </head>
 <body class="is-preload">
@@ -43,7 +61,7 @@
           <a href="index.html" class="logo"><strong>Barak Medina</strong> | Data Analyst Portfolio</a>
           <ul class="icons">
             <li><a href="https://www.linkedin.com/in/barak-medina-534807347" class="icon brands fa-linkedin" target="_blank" rel="noopener"><span class="label">LinkedIn</span></a></li>
-            <li><a href="https://github.com/Bme360/data-analyst-portfolio" target="_blank" rel="noopener" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/Bme360/Fundamental_Analysis" target="_blank" rel="noopener" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
             <li><a href="mailto:Barakmedina@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
           </ul>
         </header>
@@ -166,4 +184,5 @@
 
 </body>
 </html>
+
 
