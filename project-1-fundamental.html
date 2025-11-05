@@ -40,6 +40,16 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease; 
             display: block;
         }
+        .no-zoom-logo:hover img {
+              transform: none !important;        /* מבטל את ההגדלה (scale) */
+              position: relative !important;     /* מבטל את ה-position: absolute/fixed */
+              top: auto !important;
+              left: auto !important;
+              right: auto !important;
+              z-index: 1 !important;             /* מחזיר ל-z-index רגיל */
+              box-shadow: none !important;       /* מבטל את הצל */
+              border: none !important;           /* מבטל את המסגרת */
+          }
 
         /* אפקט ההגדלה במעבר עכבר - מופעל כברירת מחדל */
         .image-zoom-container:hover img {
@@ -133,9 +143,9 @@
 
           <!-- Company Logos -->
           <div class="row">
-            <div class="col-4 col-12-small"><div class="image-zoom-container"><img src="images/pic04.jpg" alt="CRWD logo" /></div></div>
-            <div class="col-4 col-12-small right-column"><div class="image-zoom-container"><img src="images/pic05.jpg" alt="ZS logo" /></div></div>
-            <div class="col-4 col-12-small right-column"><div class="image-zoom-container"><img src="images/pic06.jpg" alt="PANW logo" /></div></div>
+            <div class="col-4 col-12-small"><div class="image-zoom-container no-zoom-logo"><img src="images/pic04.jpg" alt="CRWD logo" /></div></div>
+            <div class="col-4 col-12-small right-column"><div class="image-zoom-container no-zoom-logo"><img src="images/pic05.jpg" alt="ZS logo" /></div></div>
+            <div class="col-4 col-12-small right-column"><div class="image-zoom-container no-zoom-logo"><img src="images/pic06.jpg" alt="PANW logo" /></div></div>
           </div>
 
           <hr />
@@ -282,3 +292,4 @@
   <script src="assets/js/main.js"></script>
 </body>
 </html>
+
