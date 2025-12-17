@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>Smart Road Safety  | Barak Medina</title>
+    <link rel="stylesheet" href="assets/css/main.css" /> 
+    <style>
+        /* Styling for the SQL code block */
+        pre {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            border-left: 3px solid #f56a6a;
+            color: #666;
+            page-break-inside: avoid;
+            font-family: monospace;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 1.6em;
+            max-width: 100%;
+            overflow: auto;
+            padding: 1em 1.5em;
+            display: block;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body class="is-preload">
+
+    <div id="wrapper">
+
+        <div id="main">
+            <div class="inner">
+
+                <header id="header">
+                    <a href="index.html" class="logo"><strong>Back to Portfolio</strong></a>
+                    <ul class="icons">
+                        <li><a href="https://www.linkedin.com/in/barak-medina-534807347" class="icon brands fa-linkedin" target="_blank" rel="noopener"><span class="label">LinkedIn</span></a></li>
+                        <li><a href="https://github.com/Bme360/DatAnalyst" class="icon brands fa-github" target="_blank" rel="noopener"><span class="label">GitHub</span></a></li>
+                        <li><a href="mailto:Barakmedina@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+                    </ul>
+                </header>
+
+                <section>
+                    <header class="main">
+                        <h1>Smart Road Safety </h1>
+                    </header>
+                    
+                    <h2>Interactive Dashboard (Power BI)</h2>
+                    <td><strong>The Challenge</strong></td>
+                    <p>In this project, I analyzed data from an intelligent transportation alert system in the US. The goal was to identify 'blind spots' where the system fails to alert to accidents, and to find patterns of serious accidents in different countries.</p>
+                    
+                    <td><strong>The Tech Stack</strong></td>
+                    <p><strong>DAX (Business Intelligence):</strong> I created advanced metrics in Power BI to calculate the severity rate of accidents and the reliability rating of the system.</p>
+                    <p><strong>Data Visualization:</strong> I built an interactive dashboard that allows decision makers to identify in seconds where the system requires improvement.</p>
+
+
+                    <div class="image main">
+                        <iframe 
+                            title="Car" 
+                            width="100%" 
+                            height="750" 
+                            src="https://app.powerbi.com/view?r=eyJrIjoiMzJkOTg5MzEtNzI5YS00NDNhLWJmNmMtZTI5NzFkNmUwMzU0IiwidCI6IjkxOGJmMzUyLTllNTItNGZjMS1hOWVlLWU0ZTI0MTdhMTQ4NCJ9" 
+                            frameborder="0" 
+                            allowFullScreen="true"
+                            style="border: 0;"
+                        ></iframe>
+                    </div>
+                    
+                    <hr class="major" />
+
+                    <h2>Project Overview & Data Preparation</h2>
+                    <p>This project focuses on auditing the reliability and efficiency of a smart transportation alert system to identify critical "blind spots" and factors contributing to road accidents. The dataset, comprising approximately 4756 traffic records, was subjected to a comprehensive ETL (Extract, Transform, Load) process to ensure data integrity and analytical readiness.</p>
+
+                    <p>The analyzed variables included: accident severity (Fatal, Major, Minor), weather conditions, road IDs, geographical locations (USA States), and system-generated alerts. By architecting a relational database in SQL, I performed rigorous data cleaning and feature engineering. This enabled the calculation of advanced metrics, such as "False Negative" alert rates and "Accident Streaks" using complex window functions and Gaps-and-Islands logic.</p>
+                    <ul class="actions">
+                        <li><a href="https://github.com/Bme360/Smart-Road-Safety-Data-Driven-Alert-System-Audit" class="button icon brands fa-github" target="_blank" rel="noopener">View SQL Code on GitHub</a></li>
+                    </ul>
+                    
+                    <hr class="major" />
+
+                    <h2>SQL Query Example</h2>
+                    <p>Which combination (road and weather) has the highest failure rate?:</p>
+
+                    <pre><code>
+/*
+Which combination (road and weather) has the highest failure rate?
+*/
+
+select s.RoadID,s.Weather
+		,sum(case
+				when s.AccidentOccurred='Yes' then 1 end ) as AccidentOccurred
+			,sum(case
+				when s.AlertGenerated='No' and s.AccidentOccurred='Yes'then 1 end )as n
+		,cast(sum(case
+				when s.AlertGenerated='No' and s.AccidentOccurred='Yes'then 1 end ) as float)/cast(sum(case
+				when s.AccidentOccurred='Yes' then 1 end )as float)
+				*100as MissRate
+from SyntheticTransportation s
+group by s.RoadID,s.Weather
+having sum(case
+				when s.AccidentOccurred='Yes' then 1 end ) >=20
+
+</code></pre>
+
+                </section>
+
+            </div>
+        </div>
+
+        <div id="sidebar">
+            <div class="inner">
+                <nav id="menu">
+                    <header class="major"><h2>Menu</h2></header>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="cv.html">My CV</a></li>
+                        <li><a href="index.html#projects-section">Projects & Analysis</a></li>
+                    </ul>
+                </nav>
+                <footer id="footer">
+                    <p class="copyright">&copy; Barak Medina. All rights reserved. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+                </footer>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>
