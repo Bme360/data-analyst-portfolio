@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Smart Road Safety Audit | Barak Medina</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <style>
+        /* Custom styling for the SQL code block to make it look professional */
+        pre {
+            background: #f6f8fa;
+            border: 1px solid #d1d5da;
+            border-left: 4px solid #2196F3; /* Blue line indicating code */
+            color: #24292e;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+            padding: 1.5em;
+            overflow-x: auto;
+            border-radius: 4px;
+        }
+        /* Highlight specific keywords if needed (simple approach) */
+        code {
+            color: #333;
+        }
+    </style>
+</head>
+<body class="is-preload">
+
+    <div id="wrapper">
+
+        <div id="main">
+            <div class="inner">
+
+                <header id="header">
+                    <a href="index.html" class="logo"><strong>Barak Medina</strong> | Data Analyst Portfolio</a>
+                    <ul class="icons">
+                        <li><a href="https://www.linkedin.com/in/barak-medina-534807347" class="icon brands fa-linkedin" target="_blank" rel="noopener"><span class="label">LinkedIn</span></a></li>
+                        <li><a href="https://github.com/Bme360/Smart-Road-Safety-Data-Driven-Alert-System-Audit" class="icon brands fa-github" target="_blank" rel="noopener"><span class="label">GitHub</span></a></li>
+                        <li><a href="mailto:Barakmedina@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+                    </ul>
+                </header>
+
+                <section>
+                    <header class="main">
+                        <h1>Smart Road Safety: Alert System Audit</h1>
+                        <p><strong>A Data-Driven Audit of Intelligent Transportation Systems using SQL & Power BI.</strong></p>
+                    </header>
+
+                    <div class="image main">
+                        <iframe 
+                            title="Smart Road Safety Dashboard" 
+                            width="100%" 
+                            height="700" 
+                            src="https://app.powerbi.com/view?r=eyJrIjoiMzJkOTg5MzEtNzI5YS00NDNhLWJmNmMtZTI5NzFkNmUwMzU0IiwidCI6IjkxOGJmMzUyLTllNTItNGZjMS1hOWVlLWU0ZTI0MTdhMTQ4NCJ9" 
+                            frameborder="0" 
+                            allowFullScreen="true"
+                            style="border: 1px solid #ddd; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        </iframe>
+                    </div>
+
+                    <hr class="major" />
+
+                    <h2>Project Overview & The Challenge</h2>
+                    <p>In this project, I acted as a Data Analyst auditing an intelligent transportation alert system in the US. The primary objective was to evaluate the system's reliability by identifying "Blind Spots"—scenarios where accidents occurred, but the system failed to generate an alert.</p>
+                    <p>The dataset comprised approximately 4,750 traffic records. I performed a comprehensive <strong>ETL process</strong> to clean the data and engineered metrics to calculate the system's "Miss Rate" (False Negatives).</p>
+
+                    <div class="row">
+                        <div class="col-6 col-12-small">
+                            <h3>Key Findings</h3>
+                            <ul>
+                                <li><strong>Weather Impact:</strong> High correlation found between adverse weather (Fog/Rain) and increased system failure rates.</li>
+                                <li><strong>Blind Spots:</strong> Identified specific Road IDs with a high frequency of un-alerted accidents.</li>
+                                <li><strong>System Reliability:</strong> Calculated the overall failure rate to help engineers prioritize firmware updates.</li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-12-small">
+                            <h3>Tech Stack & Skills</h3>
+                            <ul>
+                                <li><strong>Advanced SQL:</strong> Window Functions, CTEs, and Logic for "False Negative" detection.</li>
+                                <li><strong>Power BI (DAX):</strong> Created measures for Severity Rate and dynamic reliability KPIs.</li>
+                                <li><strong>Data Modeling:</strong> Built a relational schema to connect Road, Weather, and Accident tables.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr class="major" />
+
+                    <h2>Technical Deep Dive: SQL Logic</h2>
+                    <p>One of the core challenges was isolating specific combinations of Road IDs and Weather conditions that had a statistically significant failure rate. The query below calculates the <strong>"Miss Rate"</strong>: the percentage of accidents where no alert was generated, filtered for roads with at least 20 accidents.</p>
+
+                    <pre><code>/* Query: Identifying High-Risk Failure Zones
+   Objective: Calculate the 'Miss Rate' (No Alert during Accident) 
+   grouped by Road and Weather conditions.
+*/
+
+SELECT 
+    s.RoadID,
+    s.Weather,
+    -- Count total accidents
+    SUM(CASE WHEN s.AccidentOccurred = 'Yes' THEN 1 ELSE 0 END) AS Total_Accidents,
+    
+    -- Count missed alerts (False Negatives)
+    SUM(CASE WHEN s.AlertGenerated = 'No' AND s.AccidentOccurred = 'Yes' THEN 1 ELSE 0 END) AS Missed_Alerts,
+    
+    -- Calculate Miss Rate Percentage
+    CAST(SUM(CASE WHEN s.AlertGenerated = 'No' AND s.AccidentOccurred = 'Yes' THEN 1 END) AS FLOAT) 
+    / 
+    CAST(SUM(CASE WHEN s.AccidentOccurred = 'Yes' THEN 1 END) AS FLOAT) * 100 AS Miss_Rate_Percent
+
+FROM SyntheticTransportation s
+GROUP BY s.RoadID, s.Weather
+HAVING SUM(CASE WHEN s.AccidentOccurred = 'Yes' THEN 1 END) >= 20
+ORDER BY Miss_Rate_Percent DESC;</code></pre>
+
+                    <p>This analysis allows stakeholders to focus maintenance efforts on specific road segments rather than checking the entire network, saving operational costs and improving safety.</p>
+
+                    <ul class="actions">
+                        <li><a href="https://github.com/Bme360/Smart-Road-Safety-Data-Driven-Alert-System-Audit" class="button big icon brands fa-github" target="_blank">View Full Project on GitHub</a></li>
+                        <li><a href="index.html#projects-section" class="button big">Back to Projects List</a></li>
+                    </ul>
+
+                </section>
+
+            </div>
+        </div>
+
+        <div id="sidebar">
+            <div class="inner">
+                
+                <nav id="menu">
+                    <header class="major">
+                        <h2>Menu</h2>
+                    </header>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="cv.html">My CV</a></li>
+                        <li><a href="index.html#projects-section">Projects & Analysis</a></li>
+                        <li><a href="index.html#contact-info">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <section>
+                    <header class="major">
+                        <h2>Get in touch</h2>
+                    </header>
+                    <ul class="contact">
+                        <li class="icon solid fa-envelope"><a href="mailto:Barakmedina@gmail.com">Barakmedina@gmail.com</a></li>
+                        <li class="icon brands fa-linkedin"><a href="https://www.linkedin.com/in/barak-medina-534807347">Barak Medina</a></li>
+                        <li class="icon solid fa-phone">054-331-4266 <br><span style="font-size:0.8em; color:#888;">(WhatsApp Preferred)</span></li>
+                    </ul>
+                </section>
+
+                <footer id="footer">
+                    <p class="copyright">&copy; Barak Medina. All rights reserved.</p>
+                </footer>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>

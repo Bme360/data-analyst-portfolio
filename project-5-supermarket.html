@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Supermarket Sales Analysis | Barak Medina</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <style>
+        /* עיצוב לבלוק קוד */
+        pre {
+            background: #f6f8fa;
+            border: 1px solid #d1d5da;
+            border-left: 4px solid #3776ab; /* Python Blue */
+            color: #24292e;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+            padding: 1.5em;
+            overflow-x: auto;
+            border-radius: 4px;
+            white-space: pre-wrap; 
+        }
+        
+        .insight-box {
+            background: #fff;
+            padding: 20px;
+            border-left: 3px solid #2c3e50;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+
+        .powerbi-container {
+            position: relative;
+            overflow: hidden;
+            padding-top: 56.25%;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2em;
+        }
+
+        .powerbi-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body class="is-preload">
+
+    <div id="wrapper">
+
+        <div id="main">
+            <div class="inner">
+
+                <header id="header">
+                    <a href="index.html" class="logo"><strong>Barak Medina</strong> | Data Analyst Portfolio</a>
+                    <ul class="icons">
+                        <li><a href="https://www.linkedin.com/in/barak-medina-534807347" class="icon brands fa-linkedin" target="_blank" rel="noopener"><span class="label">LinkedIn</span></a></li>
+                        <li><a href="mailto:Barakmedina@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+                    </ul>
+                </header>
+
+                <section>
+                    <header class="main">
+                        <h1>Supermarket Sales & Growth Analysis</h1>
+                        <p><strong>End-to-end Retail Analytics using Python (Pandas) and Power BI.</strong></p>
+                    </header>
+
+                    <div class="powerbi-container">
+                        <iframe 
+                            title="Supermarket_Sales" 
+                            src="https://app.powerbi.com/view?r=eyJrIjoiN2M5YjQxOTYtZDk3Yi00OGVhLTgxMjUtNTA2NmZjZWQwNmYyIiwidCI6IjkxOGJmMzUyLTllNTItNGZjMS1hOWVlLWU0ZTI0MTdhMTQ4NCJ9" 
+                            allowFullScreen="true">
+                        </iframe>
+                    </div>
+
+                    <hr class="major" />
+
+                    <h2>Business Context & The Challenge</h2>
+                    <p>This project analyzes historical sales data to uncover trends in product popularity and customer profitability. A significant challenge was discovered during the initial audit: <strong>Data Integrity Issues</strong>. Many products were misclassified (e.g., 'Apple' labeled as 'Beverages'), requiring extensive cleaning before analysis could begin.</p>
+
+                    <div class="row">
+                        <div class="col-6 col-12-small">
+                            <h3>Key Findings & Value Delivered</h3>
+                            
+                            <div class="insight-box">
+                                <h4>1. Data Quality Audit</h4>
+                                <p><strong>Finding:</strong> Identified significant inconsistencies in product categorization (over 70% error rate in specific samples).</p>
+                                <p><strong>Value:</strong> Created a cleaning script using Pandas to re-map products to their correct categories, ensuring 100% accuracy for the final reporting.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-6 col-12-small">
+                            <h3>&nbsp;</h3>
+                            <div class="insight-box">
+                                <h4>2. Revenue Drivers</h4>
+                                <p><strong>Finding:</strong> After cleaning, <em>Personal Care</em> emerged as the top-performing category ($27k revenue), followed closely by <em>Stationery</em>.</p>
+                                <p><strong>Value:</strong> This insight corrects previous assumptions that were based on faulty data, allowing inventory managers to stock the correct high-demand items.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="major" />
+
+                    <h2>Technical Implementation: Python Code</h2>
+                    <p>Below is the actual Python code I wrote to clean the dataset and perform the exploratory data analysis (EDA). Note the explicit data correction block:</p>
+
+                    <div class="row">
+                        <div class="col-12">
+<pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+# 1. Loading Data
+sales = pd.read_csv('sales.csv')
+
+# 2. Data Cleaning & Correction (CRITICAL STEP)
+# Found mismatches between Product Name and Category. 
+# Creating a corrected dataset 'new_sales'.
+new_sales = sales.copy()
+
+new_sales.loc[new_sales['product_name'] == 'Apple', 'product_category'] = 'Fruits'
+new_sales.loc[new_sales['product_name'] == 'Orange Juice', 'product_category'] = 'Beverages'
+new_sales.loc[new_sales['product_name'] == 'Notebook', 'product_category'] = 'Stationery'
+new_sales.loc[new_sales['product_name'] == 'Detergent', 'product_category'] = 'Household'
+new_sales.loc[new_sales['product_name'] == 'Shampoo', 'product_category'] = 'Personal Care'
+
+# 3. Analysis on Cleaned Data
+# Analyzing Total Sales by Product Category
+category_sales = new_sales.groupby('product_category')['total_price'].sum().sort_values(ascending=False)
+print("Top Categories by Revenue:\n", category_sales)
+
+# Visualizing Sales Distribution by City
+sales.groupby('city')['total_price'].sum().plot(kind='pie', autopct='%1.1f%%')
+plt.title("Sales by City")
+plt.show()
+
+# Identifying Most Valuable Customers
+# Result: Female Members spend the most on average.
+valuable_customers = sales.groupby(['gender','customer_type'])['total_price'].mean().sort_values()
+</code></pre>
+                        </div>
+                    </div>
+
+                    <ul class="actions">
+                        <li><a href="https://github.com/Bme360/Supermarket-Sales-Growth-Analysis-with-Python" class="button big icon brands fa-github" target="_blank">View Full Notebook on GitHub</a></li>
+                        <li><a href="index.html#projects-section" class="button big">Back to Projects List</a></li>
+                    </ul>
+
+                </section>
+
+            </div>
+        </div>
+
+        <div id="sidebar">
+            <div class="inner">
+                <nav id="menu">
+                    <header class="major">
+                        <h2>Menu</h2>
+                    </header>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="cv.html">My CV</a></li>
+                        <li><a href="index.html#projects-section">Projects & Analysis</a></li>
+                        <li><a href="index.html#contact-info">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <section>
+                    <header class="major">
+                        <h2>Get in touch</h2>
+                    </header>
+                    <ul class="contact">
+                        <li class="icon solid fa-envelope"><a href="mailto:Barakmedina@gmail.com">Barakmedina@gmail.com</a></li>
+                        <li class="icon brands fa-whatsapp">054-331-4266 <br><span style="font-size:0.8em; color:#888;">(WhatsApp Preferred)</span></li>
+                        <li class="icon brands fa-linkedin"><a href="https://www.linkedin.com/in/barak-medina-534807347" target="_blank" rel="noopener">Barak Medina | LinkedIn</a></li>
+                    </ul>
+                </section>
+
+                <footer id="footer">
+                    <p class="copyright">&copy; Barak Medina. All rights reserved.</p>
+                </footer>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>

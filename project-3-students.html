@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>Students Performance  | Barak Medina</title>
+    <link rel="stylesheet" href="assets/css/main.css" /> 
+    <style>
+        /* Styling for the SQL code block */
+        pre {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            border-left: 3px solid #f56a6a;
+            color: #666;
+            page-break-inside: avoid;
+            font-family: monospace;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 1.6em;
+            max-width: 100%;
+            overflow: auto;
+            padding: 1em 1.5em;
+            display: block;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body class="is-preload">
+
+    <div id="wrapper">
+
+        <div id="main">
+            <div class="inner">
+
+                <header id="header">
+                    <a href="index.html" class="logo"><strong>Back to Portfolio</strong></a>
+                    <ul class="icons">
+                        <li><a href="https://www.linkedin.com/in/barak-medina-534807347" class="icon brands fa-linkedin" target="_blank" rel="noopener"><span class="label">LinkedIn</span></a></li>
+                        <li><a href="https://github.com/Bme360/DatAnalyst" class="icon brands fa-github" target="_blank" rel="noopener"><span class="label">GitHub</span></a></li>
+                        <li><a href="mailto:Barakmedina@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+                    </ul>
+                </header>
+
+                <section>
+                    <header class="main">
+                        <h1>Students Performance </h1>
+                    </header>
+                    
+                    <h2>Interactive Dashboard (Power BI)</h2>
+                    <p>This interactive dashboard, published to Power BI Service, visually presents the data analysis, allowing for quick insights into performance correlations.</p>
+                    
+                    <div class="image main">
+                        <iframe 
+                            title="Students Performance Analysis" 
+                            width="100%" 
+                            height="750" 
+                            src="https://app.powerbi.com/view?r=eyJrIjoiYTZhNjcyZmYtMmY4Yy00OTk5LWEzZDYtODM1MTRhZGM3NTk0IiwidCI6IjkxOGJmMzUyLTllNTItNGZjMS1hOWVlLWU0ZTI0MTdhMTQ4NCJ9" 
+                            frameborder="0" 
+                            allowFullScreen="true"
+                            style="border: 0;"
+                        ></iframe>
+                    </div>
+                    
+                    <hr class="major" />
+
+                    <h2>Project Overview & Data Preparation</h2>
+                    <p>This project focuses on analyzing student performance data to identify key trends and factors contributing to academic success or failure. The dataset, comprising approximately 1,000 students, was sourced from an Excel file on Kaggle and subjected to a full ETL (Extract, Transform, Load) process.</p>
+                    
+                    <p>The columns analyzed included: scores (Math, Reading, Writing), ethnic groups, gender, study assistance data, and parental education levels. By creating a relational database in SQL, I performed data cleaning, structuring, and feature engineering to calculate complex metrics such as the efficiency of study methods and student retention rates.</p>
+
+                    <ul class="actions">
+                        <li><a href="https://github.com/Bme360/StudentsPerformance" class="button icon brands fa-github" target="_blank" rel="noopener">View SQL Code on GitHub</a></li>
+                    </ul>
+                    
+                    <hr class="major" />
+
+                    <h2>SQL Query Example</h2>
+                    <p>A sample query used for data preparation and calculating average scores grouped by demographics:</p>
+
+                    <pre><code>
+/*
+Look at IDs 40 through 50 (inclusive). 
+What is the desired COUNT of students whose highest score among the three (Math, Reading, Writing)
+is actually a MathScore and is not equal to the other scores ?
+*/
+
+select count(StudentID) as StudentID
+from(
+select s.StudentID as StudentID ,s.mathScore as mathScore,s.writingScore as writingScore,
+		s.readingScore as readingScore
+from student s
+where s.mathScore > s.readingScore AND s.mathScore > s.writingScore
+)a
+where StudentID between 40 and 50
+
+</code></pre>
+
+                    <ul class="actions">
+                        
+                        <li><a href="index.html#projects-section" class="button big">Back to Projects List</a></li>
+                    </ul>
+
+                </section>
+
+            </div>
+        </div>
+
+        <div id="sidebar">
+            <div class="inner">
+                <nav id="menu">
+                    <header class="major"><h2>Menu</h2></header>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="cv.html">My CV</a></li>
+                        <li><a href="index.html#projects-section">Projects & Analysis</a></li>
+                    </ul>
+                </nav>
+                <footer id="footer">
+                    <p class="copyright">&copy; Barak Medina. All rights reserved. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+                </footer>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>
