@@ -1,0 +1,82 @@
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI',Arial,sans-serif">
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1a2a"/>
+      <stop offset="100%" style="stop-color:#1a3a4a"/>
+    </linearGradient>
+    <linearGradient id="barG" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#0891b2"/>
+      <stop offset="100%" style="stop-color:#2dd4bf"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg5)"/>
+
+  <!-- Title -->
+  <text x="400" y="35" text-anchor="middle" fill="#2dd4bf" font-size="15" font-weight="700" letter-spacing="2">SUPERMARKET SALES &amp; GROWTH ANALYSIS</text>
+
+  <!-- KPI Row -->
+  <rect x="40" y="55" width="155" height="80" fill="rgba(45,212,191,0.1)" rx="10" stroke="rgba(45,212,191,0.25)" stroke-width="1"/>
+  <text x="117" y="93" text-anchor="middle" fill="#2dd4bf" font-size="26" font-weight="800">$307K</text>
+  <text x="117" y="116" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="11">Total Revenue</text>
+
+  <rect x="210" y="55" width="155" height="80" fill="rgba(129,140,248,0.1)" rx="10" stroke="rgba(129,140,248,0.25)" stroke-width="1"/>
+  <text x="287" y="93" text-anchor="middle" fill="#818cf8" font-size="26" font-weight="800">$27K</text>
+  <text x="287" y="116" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="11">Personal Care #1</text>
+
+  <rect x="380" y="55" width="155" height="80" fill="rgba(251,191,36,0.08)" rx="10" stroke="rgba(251,191,36,0.2)" stroke-width="1"/>
+  <text x="457" y="87" text-anchor="middle" fill="#fbbf24" font-size="18" font-weight="800">Female</text>
+  <text x="457" y="107" text-anchor="middle" fill="#fbbf24" font-size="14" font-weight="600">Members</text>
+  <text x="457" y="125" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="11">Top Segment</text>
+
+  <rect x="550" y="55" width="210" height="80" fill="rgba(251,113,133,0.08)" rx="10" stroke="rgba(251,113,133,0.2)" stroke-width="1"/>
+  <text x="655" y="87" text-anchor="middle" fill="#fb7185" font-size="16" font-weight="800">70% Error Rate</text>
+  <text x="655" y="107" text-anchor="middle" fill="#fb7185" font-size="13">Fixed with Python</text>
+  <text x="655" y="125" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="11">Data Cleaning</text>
+
+  <!-- Bar chart - Revenue by Category -->
+  <text x="300" y="168" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="12">Revenue by Category (After Cleaning)</text>
+  <line x1="90" y1="178" x2="90" y2="330" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <line x1="90" y1="330" x2="510" y2="330" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+
+  <!-- Bars -->
+  <rect x="105" y="222" width="52" height="108" fill="url(#barG)" rx="4"/>
+  <text x="131" y="215" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="10">$27K</text>
+  <text x="131" y="348" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="10">Personal</text>
+  <text x="131" y="360" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="10">Care</text>
+
+  <rect x="172" y="235" width="52" height="95" fill="url(#barG)" rx="4" opacity="0.85"/>
+  <text x="198" y="228" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="10">$23K</text>
+  <text x="198" y="348" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="10">Stationery</text>
+
+  <rect x="239" y="248" width="52" height="82" fill="url(#barG)" rx="4" opacity="0.75"/>
+  <text x="265" y="241" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="10">$20K</text>
+  <text x="265" y="348" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="10">Household</text>
+
+  <rect x="306" y="262" width="52" height="68" fill="url(#barG)" rx="4" opacity="0.65"/>
+  <text x="332" y="255" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="10">$17K</text>
+  <text x="332" y="348" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="10">Beverages</text>
+
+  <rect x="373" y="275" width="52" height="55" fill="url(#barG)" rx="4" opacity="0.55"/>
+  <text x="399" y="268" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="10">$13K</text>
+  <text x="399" y="348" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="10">Fruits</text>
+
+  <!-- Pie chart right - Sales by City -->
+  <text x="650" y="168" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="12">Sales by City</text>
+  <circle cx="650" cy="255" r="72" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="40"/>
+  <circle cx="650" cy="255" r="72" fill="none" stroke="#2dd4bf" stroke-width="40" stroke-dasharray="135 317" stroke-dashoffset="90" transform="rotate(-90 650 255)"/>
+  <circle cx="650" cy="255" r="72" fill="none" stroke="#818cf8" stroke-width="40" stroke-dasharray="113 317" stroke-dashoffset="-45" transform="rotate(-90 650 255)"/>
+  <circle cx="650" cy="255" r="72" fill="none" stroke="#fbbf24" stroke-width="40" stroke-dasharray="69 317" stroke-dashoffset="-158" transform="rotate(-90 650 255)"/>
+  <text x="650" y="250" text-anchor="middle" fill="white" font-size="16" font-weight="800">3</text>
+  <text x="650" y="268" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="10">Cities</text>
+
+  <!-- Pie legend -->
+  <rect x="560" y="345" width="10" height="10" fill="#2dd4bf" rx="2"/>
+  <text x="576" y="355" fill="rgba(255,255,255,0.6)" font-size="11">Yangon 42%</text>
+  <rect x="650" y="345" width="10" height="10" fill="#818cf8" rx="2"/>
+  <text x="666" y="355" fill="rgba(255,255,255,0.6)" font-size="11">Mandalay 36%</text>
+  <rect x="560" y="365" width="10" height="10" fill="#fbbf24" rx="2"/>
+  <text x="576" y="375" fill="rgba(255,255,255,0.6)" font-size="11">Naypyitaw 22%</text>
+
+  <!-- Footer -->
+  <text x="400" y="415" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="11">Python (Pandas) · Data Cleaning · EDA · Power BI · End-to-End Analysis</text>
+</svg>
